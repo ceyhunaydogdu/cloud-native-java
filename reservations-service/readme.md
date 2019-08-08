@@ -9,10 +9,9 @@ there might be a need to refresh the application, so we should enalbe refreshing
 management.endpoints.web.exposure.include=*
 ```
 
-In order to refresh reservation-service application, run following curl command.
+In order to refresh reservation-service application, run following curl command. The output is a list of changed properties as shown below.
 
 ```curl
-
 $ curl -d{} -H "Content-Type:application/json"  http://localhost:8000/actuator/refresh
 
 ["config.client.version","message"]
