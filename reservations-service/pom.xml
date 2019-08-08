@@ -93,13 +93,13 @@
 
 	<build>
 		<plugins>
-		<plugin>
-			<groupId>pl.project13.maven</groupId>
-			<artifactId>git-commit-id-plugin</artifactId>
-		</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- Uncomment the configuration below to turn jar into executable -->
+				<!-- <configuration>
+					<executable>true</executable>
+				</configuration> -->
 			</plugin>
 		</plugins>
 	</build>
