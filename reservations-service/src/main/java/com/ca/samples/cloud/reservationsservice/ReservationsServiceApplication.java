@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @SpringBootApplication
@@ -32,9 +36,33 @@ public class ReservationsServiceApplication {
 			this.reservationRepo.findAll().forEach(System.out::println);
 		};
 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationsServiceApplication.class, args);
 	}
+
+}
+
+@RestController
+class MessageController{
+
+	private final String value;
+
+	/**
+	 * @param value
+	 */
+
+	public MessageController(@Value("${message}") String value) {
+		this.value = value;
+	}
+	
+	@GetMapping(value="/message")
+	public String getMessage(){
+		return this.value;
+	}
+	
+	
+	
 
 }
 
