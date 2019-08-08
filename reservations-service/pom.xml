@@ -13,7 +13,7 @@
 	<artifactId>reservations-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>reservations-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Spring Boot Cloud Native Workshop Reservation Service Application</description>
 	
 	<properties>
 		<java.version>11</java.version>

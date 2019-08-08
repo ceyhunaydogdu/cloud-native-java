@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,7 +20,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @SpringBootApplication
@@ -31,7 +31,7 @@ public class ReservationsServiceApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(){
 		return args -> {
-			Stream.of("Ceyhun", "Demet", "Fırat", "Sare", "Gonca", "Salih", "Havva")
+			Stream.of("Ceyhun", "Micheal", "Axel", "Salih", "Mehmet", "Hans", "Jennifer")
 				.forEach(name -> this.reservationRepo.save(new Reservation(name)));
 			this.reservationRepo.findAll().forEach(System.out::println);
 		};
@@ -43,6 +43,7 @@ public class ReservationsServiceApplication {
 
 }
 
+@RefreshScope
 @RestController
 class MessageController{
 
@@ -69,7 +70,7 @@ class MessageController{
 @RepositoryRestResource
 interface ReservationRepository extends JpaRepository<Reservation, Long>{
 	@RestResource(path = "by-message")
-	List<Reservation> findByReservationName(@Param(value = "rn") String rn);
+	List<Reservation> findByReservationNameContainingIgnoringCase(@Param(value = "rn") String rn);
 }
 
 @Entity
