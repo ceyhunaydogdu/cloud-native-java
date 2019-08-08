@@ -97,9 +97,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<!-- Uncomment the configuration below to turn jar into executable -->
-				<!-- <configuration>
+				<configuration>
 					<executable>true</executable>
-				</configuration> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
