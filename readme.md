@@ -4,9 +4,9 @@ This repository contains a workshop for developing cloud native application usin
 
 ## Cloud Native Java Workshop Configuration Properties
 
-This folder serves as a configuration base for `Config Service(Server) Application` and contains properties files for each application used in the workshop.
+The `config` folder serves as a configuration base for `Config Service(Server) Application` and contains properties files for each application used in the workshop.
 
-After updating or editing any file on the fly in this configuration folder, changes can be committed with git command as the example below in order to reflect to the runnig services.
+After updating or editing any file on the fly in this configuration folder, changes can be committed with git command as the example below in order to reflect changes to the runnig services.
 
 ```git
 $ git commit -a -m YOLO
