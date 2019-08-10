@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ConfigServiceApplication<config-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.configservice.ConfigServiceApplication",
+            "projectName": "config-service",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServiceApplication<eureka-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.eurekaservice.EurekaServiceApplication",
+            "projectName": "eureka-service",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReservationsServiceApplication<reservations-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.reservationsservice.ReservationsServiceApplication",
+            "projectName": "reservations-service",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReservationClientApplication<reservation-client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.reservationclient.ReservationClientApplication",
+            "projectName": "reservation-client",
+            "args": ""
+        }
+    ]
+}
