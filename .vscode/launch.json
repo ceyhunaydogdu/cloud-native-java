@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ReservationClientApplication",
+            "request": "launch",
+            "mainClass": "com.ca.samples.cloud.reservationclient.ReservationClientApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ConfigServiceApplication<config-service>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
