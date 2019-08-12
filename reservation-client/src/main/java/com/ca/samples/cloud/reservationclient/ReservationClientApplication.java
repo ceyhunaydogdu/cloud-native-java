@@ -21,17 +21,25 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+
+@EnableBinding(ReservationChannels.class)
 @EnableCircuitBreaker
 @EnableZuulProxy
 @EnableEurekaClient
@@ -50,12 +58,18 @@ public class ReservationClientApplication {
 
 }
 
+interface ReservationChannels {
+	@Output
+	MessageChannel output();
+}
+
 
 @RestController
 @RequestMapping(path = "/reservations")
 class ReservationApiGatewayRestController {
 
 	private final RestTemplate rtemplate;
+	private final MessageChannel out;
 
 	public List<String> saver() {
 		return new ArrayList<>();
@@ -76,11 +90,19 @@ class ReservationApiGatewayRestController {
 			.collect(Collectors.toList());
 	}
 
+	@PostMapping
+	public void write(@RequestBody Reservation	r) {
+		Message<String> message = org.springframework.messaging.support.MessageBuilder.withPayload(r.getReservationName()).build();
+		this.out.send(message);
+	}
+
+
 	/**
 	 * @param rtemplate
 	 */
 	@Autowired
-	public ReservationApiGatewayRestController(RestTemplate rtemplate) {
+	public ReservationApiGatewayRestController(RestTemplate rtemplate, ReservationChannels rChannels) {
+		this.out=rChannels.output();
 		this.rtemplate = rtemplate;
 	}
 	

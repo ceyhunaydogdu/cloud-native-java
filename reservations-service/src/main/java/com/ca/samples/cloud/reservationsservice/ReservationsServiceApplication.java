@@ -14,15 +14,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.integration.annotation.MessageEndpoint;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.SubscribableChannel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@EnableBinding(ReservationChannels.class)
 @SpringBootApplication
 @EnableEurekaClient
 // The one below also works
@@ -66,9 +72,26 @@ class MessageController{
 		return this.value;
 	}
 	
-	
-	
+}
 
+@MessageEndpoint
+class ReservationProcessor {
+	private ReservationRepository reservationRepo;
+
+	@Autowired
+	public ReservationProcessor(ReservationRepository reservationRepository) {
+		this.reservationRepo=reservationRepository;
+	}
+
+	@ServiceActivator(inputChannel = "input")
+	public void acceptNewReservation(Message<String> msg) {
+		this.reservationRepo.save(new Reservation(msg.getPayload()));
+	}
+}
+
+interface ReservationChannels {
+	@Input
+	SubscribableChannel input();
 }
 
 @RepositoryRestResource
