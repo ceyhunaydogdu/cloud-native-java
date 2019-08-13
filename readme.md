@@ -44,3 +44,8 @@ Below is the curl command to insert reservation through messaging service
 $ curl -d '{ "reservationName": "Emirhan"}' -H "Content-Type:application/json" http://localhost:9999/reservations
 
 ```
+
+@ Hystrix Dashboard
+
+To enable hystrix dashboard for monitoring the application [hystrix stream endpoint](https://localhost:9999/actuator/hystrix.stream) should be fed to dashboard ui which is available at [http://localhost:8010/hystrix.html](http://localhost:8010/hystrix.html).
+
