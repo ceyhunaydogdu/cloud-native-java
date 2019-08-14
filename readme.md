@@ -55,7 +55,7 @@ In order to monitor distributed traces of the applications, we need run Zipkin U
 
 ```docker
 
-$ docker run --rm -d -p 9411:9411 openzipkin/zipkin
+$ docker run --rm -d -p 9411:9411 --name zca openzipkin/zipkin
 
 ```
 
