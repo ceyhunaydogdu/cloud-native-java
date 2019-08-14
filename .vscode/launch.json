@@ -45,6 +45,16 @@
             "mainClass": "com.ca.samples.cloud.reservationclient.ReservationClientApplication",
             "projectName": "reservation-client",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HystrixDashboardApplication<hystrix-dashboard>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.hystrixdashboard.HystrixDashboardApplication",
+            "projectName": "hystrix-dashboard",
+            "args": ""
         }
     ]
 }

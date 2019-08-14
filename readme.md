@@ -31,9 +31,9 @@ Docker commands to run the `RabbitMQ` and `RabbitMQ Management` images respectiv
 
 ```docker
 
-$ docker run -rm -d --hostname ca-rabbit -p 5672:5672 --name rca -d rabbitmq:3-alpine
+$ docker run --rm -d --hostname ca-rabbit -p 5672:5672 --name rca -d rabbitmq:3-alpine
 
-$ docker run -rm -d --hostname cam-rabbit -p 15672:15672 --name rmca rabbitmq:3-management-alpine
+$ docker run --rm -d --hostname cam-rabbit -p 15672:15672 --name rmca rabbitmq:3-management-alpine
 
 ```
 
