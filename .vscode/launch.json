@@ -55,6 +55,16 @@
             "mainClass": "com.ca.samples.cloud.hystrixdashboard.HystrixDashboardApplication",
             "projectName": "hystrix-dashboard",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ZipkinServiceApplication<zipkin-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.zipkinservice.ZipkinServiceApplication",
+            "projectName": "zipkin-service",
+            "args": ""
         }
     ]
 }
