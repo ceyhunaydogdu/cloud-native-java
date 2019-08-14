@@ -45,7 +45,31 @@ $ curl -d '{ "reservationName": "Emirhan"}' -H "Content-Type:application/json" h
 
 ```
 
-@ Hystrix Dashboard
+## Hystrix Dashboard
 
 To enable hystrix dashboard for monitoring the application [hystrix stream endpoint](https://localhost:9999/actuator/hystrix.stream) should be fed to dashboard ui which is available at [http://localhost:8010/hystrix.html](http://localhost:8010/hystrix.html).
 
+## Zipkin Service
+
+In order to monitor distributed traces of the applications, we need run Zipkin UI on docker separetly. Docker commands to run `zipkin server` image on local machine is below.
+
+```docker
+
+$ docker run --rm -d -p 9411:9411 openzipkin/zipkin
+
+```
+
+Then, we need to add following dependencies to pom files of both `reservations-service` and `reservation-client` applications to enable them send traces to zipkin server.
+
+```maven
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-zipkin</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+
+```
