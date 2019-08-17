@@ -15,6 +15,13 @@ $ git commit -a -m YOLO
  1 file changed, 3 insertions(+), 2 deletions(-)
 ```
 
+Following curl command should executed to refresh the application
+
+```curl
+$ curl -d{} -X POST -H "Content-Type:application/json" http://localhost:8000/actuator/refresh
+
+```
+
 ## Messaging with RabbitMQ
 
 Docker commands to pull `RabbitMQ` and `RabbitMQ Management` images respectively from docker hub is below
