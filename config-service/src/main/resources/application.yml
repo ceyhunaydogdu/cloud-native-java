@@ -5,6 +5,6 @@ spring:
         git:
           uri: ${CA}/cloud-native-java
           search-paths:
-          - config
+          - config-service/config
 server:
   port: 8888
