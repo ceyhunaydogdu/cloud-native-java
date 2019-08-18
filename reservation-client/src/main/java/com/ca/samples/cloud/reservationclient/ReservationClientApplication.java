@@ -94,6 +94,7 @@ class ReservationApiGatewayRestController {
 	public void write(@RequestBody Reservation	r) {
 		Message<String> message = org.springframework.messaging.support.MessageBuilder.withPayload(r.getReservationName()).build();
 		this.out.send(message);
+		System.out.println("bul: message sent.. "+message.toString());
 	}
 
 
