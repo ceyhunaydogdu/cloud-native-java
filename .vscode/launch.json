@@ -65,6 +65,16 @@
             "mainClass": "com.ca.samples.cloud.zipkinservice.ZipkinServiceApplication",
             "projectName": "zipkin-service",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AuthServiceApplication<auth-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ca.samples.cloud.authservice.AuthServiceApplication",
+            "projectName": "auth-service",
+            "args": ""
         }
     ]
 }

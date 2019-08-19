@@ -1,6 +1,5 @@
 package com.ca.samples.cloud.authservice;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -29,12 +28,13 @@ public class ClientConfiguration {
     }
 
     @Bean
-    public ClientDetailsService clientDetailsService(ClientRepository clientRepository) {
+    public ClientDetailsService myClientDetailsService(ClientRepository clientRepository) {
         return clientId -> clientRepository
             .findByClientId(clientId)
             .map(
                 client -> {
-                    BaseClientDetails baseClientDetails= new BaseClientDetails(client.getCliendId(), null, client.getScopes(), client.getAuthorizedGrantTypes(), client.getAuthorities());
+                    BaseClientDetails baseClientDetails= new BaseClientDetails(client.getClientId(), null,
+                                    client.getScopes(), client.getAuthorizedGrantTypes(), client.getAuthorities());
                     baseClientDetails.setClientSecret(client.getSecret());
                     // baseClientDetails.setAutoApproveScopes(List.of(client.getAutoApproveScopes().split(",")));
                     String reservationClientRedirectUri=Optional

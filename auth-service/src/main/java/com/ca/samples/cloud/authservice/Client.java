@@ -22,7 +22,7 @@ public class Client {
     @GeneratedValue
     private Long id;
 
-    private String cliendId, secret;
+    private String clientId, secret;
 
     private String scopes= StringUtils.arrayToCommaDelimitedString(new String[] {"openid"});
     
@@ -38,7 +38,7 @@ public class Client {
      */
 
     public Client(String cliendId, String secret) {
-        this.cliendId = cliendId;
+        this.clientId = cliendId;
         this.secret = secret;
     }
 
