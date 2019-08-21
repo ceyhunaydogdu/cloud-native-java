@@ -28,13 +28,13 @@ public class AuthServiceApplication implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		//Registering custom users to the auth-service
-		Stream.of("ceyhun,native", "timtim,tim", "reservation-client,res-secret")
+		Stream.of("ceyhun,native", "timtim,{noop}tim", "reservation-client,res-secret")
 			.map(s->s.split(","))
 			.forEach(tuple -> personRepository.save(new Person(tuple[0], tuple[1], true)));
 
 		personRepository.findAll().forEach(System.out::println);
 		//Registering custom client apps to the auth-service
-		Stream.of("reservation-client,res-secret")
+		Stream.of("reservation-client,{noop}res-secret")
 			.map(s->s.split(","))
 			.forEach(tuple -> clientRepository.save(new Client(tuple[0],tuple[1])));
 
