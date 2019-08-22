@@ -12,10 +12,10 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * PersonConfiguration
+ * WebSecurityConfiguration
  */
 @Configuration
-public class PersonConfiguration extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Bean
     @Override
@@ -34,7 +34,6 @@ public class PersonConfiguration extends WebSecurityConfigurerAdapter{
 		return username -> personRepository
 			.findByUsername(username)
 			.map(person -> {
-				System.out.println("In Userdetailsservice : "+person.toString());
 				boolean active=person.isActive();
 				return new User(person.getUsername(), person.getPassword(), active, active, active, active, AuthorityUtils.createAuthorityList("ROLE_ADMIN", "ROLE_USER"));
 			})

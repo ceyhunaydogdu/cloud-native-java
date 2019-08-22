@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,29 +19,23 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
-
-    // private final ClientDetailsService clientDetailsService;
-
-    /**
-     * @param authenticationManager
-     * @param clientDetailsService
-     */
     @Autowired
-    public AuthorizationServerConfiguration(AuthenticationManager authenticationManager
-            ) {
-        this.authenticationManager = authenticationManager;
-        // this.clientDetailsService = clientDetailsService;
-    }
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+
+    // @Autowired
+    // private PasswordEncoder passwordEncoder;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // clients.withClientDetails(clientDetailsService);
-        clients.inMemory()
-                .withClient("cat")
-                .secret("{noop}catsecret")
-                .authorizedGrantTypes("password")
-                .scopes("openid");
+        clients.withClientDetails(clientDetailsService);
+        // clients.inMemory()
+        //         .withClient("cat")
+        //         .secret("{noop}catsecret")
+        //         .authorizedGrantTypes("password")
+        //         .scopes("openid");
     }
 
     @Override
@@ -48,9 +43,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints.authenticationManager(authenticationManager);
     }
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
-    }
+    // @Override
+    // public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    //     security.passwordEncoder(this.passwordEncoder);
+    // }
 
 }

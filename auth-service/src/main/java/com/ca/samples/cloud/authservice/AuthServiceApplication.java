@@ -34,11 +34,11 @@ public class AuthServiceApplication implements ApplicationRunner {
 
 		personRepository.findAll().forEach(System.out::println);
 		//Registering custom client apps to the auth-service
-		// Stream.of("reservation-client,{noop}res-secret", "reservations,{noop}secret")
-		// 	.map(s->s.split(","))
-		// 	.forEach(tuple -> clientRepository.save(new Client(tuple[0],tuple[1])));
+		Stream.of("reservation-client,{noop}res-secret", "reservations,{noop}secret", "cat,{noop}catsecret")
+			.map(s->s.split(","))
+			.forEach(tuple -> clientRepository.save(new Client(tuple[0],tuple[1])));
 
-		// clientRepository.findAll().forEach(System.out::println);
+		clientRepository.findAll().forEach(System.out::println);
 	}
 
 }
