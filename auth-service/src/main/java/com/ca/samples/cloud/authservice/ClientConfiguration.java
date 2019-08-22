@@ -33,6 +33,7 @@ public class ClientConfiguration {
             .findByClientId(clientId)
             .map(
                 client -> {
+                    System.out.println("in clientdetailsService ::: "+client.toString());
                     BaseClientDetails baseClientDetails= new BaseClientDetails(client.getClientId(), null,
                                     client.getScopes(), client.getAuthorizedGrantTypes(), client.getAuthorities());
                     baseClientDetails.setClientSecret(client.getSecret());

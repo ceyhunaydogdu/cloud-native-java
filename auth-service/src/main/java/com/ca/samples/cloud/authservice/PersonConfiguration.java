@@ -19,6 +19,7 @@ class PersonConfiguration {
 		return username -> personRepository
 			.findByUsername(username)
 			.map(person -> {
+				System.out.println("In Userdetailsservice : "+person.toString());
 				boolean active=person.isActive();
 				return new User(person.getUsername(), person.getPassword(), active, active, active, active, AuthorityUtils.createAuthorityList("ROLE_ADMIN", "ROLE_USER"));
 			})

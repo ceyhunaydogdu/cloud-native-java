@@ -34,7 +34,7 @@ public class AuthServiceApplication implements ApplicationRunner {
 
 		personRepository.findAll().forEach(System.out::println);
 		//Registering custom client apps to the auth-service
-		Stream.of("reservation-client,{noop}res-secret")
+		Stream.of("reservation-client,{noop}res-secret", "reservations-service,service")
 			.map(s->s.split(","))
 			.forEach(tuple -> clientRepository.save(new Client(tuple[0],tuple[1])));
 
