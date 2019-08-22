@@ -22,21 +22,21 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-eureka-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-eureka-client</artifactId>
-		</dependency>
+		</dependency> -->
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
 		</dependency>
 
 		<dependency>
@@ -63,18 +63,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>build-classpath</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>build-classpath</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<outputFile>classpath.txt</outputFile>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
