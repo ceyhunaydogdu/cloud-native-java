@@ -1,5 +1,5 @@
 package com.ca.samples.cloud.authservice;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,27 +20,27 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     private final AuthenticationManager authenticationManager;
 
-    private final ClientDetailsService clientDetailsService;
+    // private final ClientDetailsService clientDetailsService;
 
     /**
      * @param authenticationManager
      * @param clientDetailsService
      */
     @Autowired
-    public AuthorizationServerConfiguration(AuthenticationManager authenticationManager,
-            ClientDetailsService clientDetailsService) {
+    public AuthorizationServerConfiguration(AuthenticationManager authenticationManager
+            ) {
         this.authenticationManager = authenticationManager;
-        this.clientDetailsService = clientDetailsService;
+        // this.clientDetailsService = clientDetailsService;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetailsService);
-        // clients.inMemory()
-        //         .withClient("cat")
-        //         .secret("catsecret")
-        //         .authorizedGrantTypes("password")
-        //         .scopes("openid");
+        // clients.withClientDetails(clientDetailsService);
+        clients.inMemory()
+                .withClient("cat")
+                .secret("{noop}catsecret")
+                .authorizedGrantTypes("password")
+                .scopes("openid");
     }
 
     @Override

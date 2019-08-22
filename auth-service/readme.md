@@ -1,5 +1,7 @@
 # Spring Boot OAuth2 Authorization Server Application
 
+After setting up the oauth2-server, we can get access token by using curl command as shown below.
+
 ```curl
 
 $ curl -d "username=ceyhun&password=native&grant_type=password&scope=openid&client_id=reservation-client&client_secret=res-secret" -H "Accept:application/json" -X POST -vu reservation-client:res-secret http://localhost:9191/uaa/oauth/token

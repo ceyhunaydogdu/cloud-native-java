@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 /**
  * ClientConfiguration
  */
-@Configuration
+// @Configuration
 public class ClientConfiguration {
 
     private final LoadBalancerClient loadBalancerClient;
@@ -22,12 +22,12 @@ public class ClientConfiguration {
     /**
      * @param loadBalancerClient
      */
-    @Autowired
+    // @Autowired
     public ClientConfiguration(LoadBalancerClient loadBalancerClient) {
         this.loadBalancerClient = loadBalancerClient;
     }
 
-    @Bean
+    // @Bean
     public ClientDetailsService myClientDetailsService(ClientRepository clientRepository) {
         return clientId -> clientRepository
             .findByClientId(clientId)
