@@ -1,16 +1,23 @@
-server.port=9191
-server.servlet.context-path=/uaa
+server:
+  port: 9191
+management:
+  server:
+    servlet:
+      context-path: "/uaa"
 
-logging.level.org.springframework.security=DEBUG
+logging:
+  level: DEBUG
 
-eureka.instance.hostname=localhost
+
+
+eureka:
+  instance:
+    hostname: localhost
 # eureka.instance.prefer-ip-address=true
 # eureka.instance.ip-address=192.168.1.7
 
 # spring.security.user.name=us 
 # spring.security.user.password= {noop}pass
-
-
 
 #security.oauth2.client.clientId: acme
 #security.oauth2.client.clientSecret: acmesecret
