@@ -10,12 +10,12 @@ logging:
     org.springframework.security: DEBUG 
 
 eureka:
-  # instance:
-    # hostname: localhost
-  client:
+  instance:
+    hostname: localhost
+  # client:
     # service-url: http://localhost:8761/eureka/
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    # serviceUrl:
+      # defaultZone: http://localhost:8761/eureka/
 
       
 # eureka.instance.prefer-ip-address=true
