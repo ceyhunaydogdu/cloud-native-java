@@ -11,7 +11,8 @@ logging:
 
 eureka:
   instance:
-    prefer-ip-address: true
+    virtual-host-name: auth-serv
+    # prefer-ip-address: true
     # hostname: localhost
   # client:
     # service-url: http://localhost:8761/eureka/
