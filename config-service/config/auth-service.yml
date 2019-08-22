@@ -14,7 +14,7 @@ eureka:
     prefer-ip-address: true
     ip-address: 192.168.1.7
     # virtual-host-name: auth-serv
-    # hostname: localhost
+    hostname: localhost
   # client:
     # service-url: http://localhost:8761/eureka/
     # serviceUrl:
