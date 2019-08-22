@@ -11,7 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @EnableEurekaClient
-@EnableResourceServer
+// @EnableResourceServer
 @SpringBootApplication
 public class AuthServiceApplication implements ApplicationRunner {
 
