@@ -2,8 +2,8 @@ server:
   port: 9191
 management:
   server:
-    servlet:x
-      context-path: "/uaa"
+    servlet:
+      context-path: /uaa
 
 logging:
   level: 
