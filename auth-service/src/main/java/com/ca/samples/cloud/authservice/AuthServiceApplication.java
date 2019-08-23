@@ -11,7 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @EnableEurekaClient
-// @EnableResourceServer
+@EnableResourceServer
 @SpringBootApplication
 public class AuthServiceApplication implements ApplicationRunner {
 
@@ -34,7 +34,7 @@ public class AuthServiceApplication implements ApplicationRunner {
 
 		personRepository.findAll().forEach(System.out::println);
 		//Registering custom client apps to the auth-service
-		Stream.of("reservation-client,{noop}res-secret", "reservations,{noop}secret", "cat,{noop}catsecret")
+		Stream.of("reservation-client,{noop}res-secret", "android-app,{noop}and-secret")
 			.map(s->s.split(","))
 			.forEach(tuple -> clientRepository.save(new Client(tuple[0],tuple[1])));
 

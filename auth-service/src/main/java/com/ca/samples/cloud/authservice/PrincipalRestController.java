@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
  * PrincipalRestController
  */
 @RestController
-@EnableResourceServer
+// @EnableResourceServer
 public class PrincipalRestController {
 
     @GetMapping(value="/user")
     public Principal principal(Principal principal) {
+        System.out.printf("Hello from %s", principal.getName());
         return principal;
     }
     
