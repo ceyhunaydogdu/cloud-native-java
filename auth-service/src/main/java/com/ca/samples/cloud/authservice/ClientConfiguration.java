@@ -12,9 +12,11 @@ import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 
 /**
- * ClientConfiguration
+ * This ClientConfiguration class creates customized ClientDetailsService.
+ * Since we have overridden the original ClientDetailsService with one in AuthorizationServerConfiguartion class,
+ * this class is not used and left as an example.
  */
-@Configuration
+// @Configuration
 public class ClientConfiguration {
 
     private final LoadBalancerClient loadBalancerClient;
@@ -27,7 +29,7 @@ public class ClientConfiguration {
         this.loadBalancerClient = loadBalancerClient;
     }
 
-    @Bean
+    // @Bean
     public ClientDetailsService myClientDetailsService(ClientRepository clientRepository) {
         return clientId -> clientRepository
             .findByClientId(clientId)
@@ -38,10 +40,10 @@ public class ClientConfiguration {
                     baseClientDetails.setClientSecret(client.getSecret());
                     // baseClientDetails.setAutoApproveScopes(List.of(client.getAutoApproveScopes().split(",")));
                     String reservationClientRedirectUri=Optional
-                        .ofNullable(this.loadBalancerClient.choose("reservation-client"))
-                        .map(rsi-> "http://"+rsi.getHost()+":"+rsi.getPort()+"/")
-                        .orElseThrow(()-> new ClientRegistrationException("Couldn't find and bind reservation-client IP"));
-
+                    .ofNullable(this.loadBalancerClient.choose("reservation-client"))
+                    .map(rsi-> "http://"+rsi.getHost()+":"+rsi.getPort()+"/reservations/names")
+                    .orElseThrow(()-> new ClientRegistrationException("Couldn't find and bind reservation-client IP"));
+                    
                     baseClientDetails.setRegisteredRedirectUri(Set.of(reservationClientRedirectUri));
                     return baseClientDetails;
                 })

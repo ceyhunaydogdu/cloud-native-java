@@ -39,7 +39,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@EnableResourceServer
+// @EnableResourceServer
 @EnableBinding(ReservationChannels.class)
 @EnableCircuitBreaker
 @EnableZuulProxy
@@ -64,7 +64,7 @@ interface ReservationChannels {
 	MessageChannel output();
 }
 
-
+@EnableResourceServer
 @RestController
 @RequestMapping(path = "/reservations")
 class ReservationApiGatewayRestController {
