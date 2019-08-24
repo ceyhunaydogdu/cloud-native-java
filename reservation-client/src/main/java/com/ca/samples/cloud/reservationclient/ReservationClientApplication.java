@@ -31,6 +31,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,6 +66,7 @@ interface ReservationChannels {
 }
 
 @EnableResourceServer
+@EnableOAuth2Client
 @RestController
 @RequestMapping(path = "/reservations")
 class ReservationApiGatewayRestController {
