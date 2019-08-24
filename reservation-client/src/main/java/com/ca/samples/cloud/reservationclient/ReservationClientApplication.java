@@ -17,6 +17,7 @@ import com.netflix.zuul.exception.ZuulException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -24,6 +25,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
@@ -31,6 +33,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +43,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-// @EnableResourceServer
 @EnableBinding(ReservationChannels.class)
 @EnableCircuitBreaker
 @EnableZuulProxy
@@ -66,10 +68,19 @@ interface ReservationChannels {
 }
 
 @EnableResourceServer
-@EnableOAuth2Client
+// @EnableOAuth2Client
 @RestController
 @RequestMapping(path = "/reservations")
 class ReservationApiGatewayRestController {
+	@Autowired
+	private UserInfoRestTemplateFactory factory;
+
+	@Bean
+	@Lazy
+	@LoadBalanced
+	public OAuth2RestTemplate authRestTemplate() {
+		return factory.getUserInfoRestTemplate();
+	}
 
 	private final RestTemplate rtemplate;
 	private final MessageChannel out;
