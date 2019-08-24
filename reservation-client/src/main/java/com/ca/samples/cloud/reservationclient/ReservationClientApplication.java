@@ -2,6 +2,7 @@ package com.ca.samples.cloud.reservationclient;
 
 import static org.springframework.http.HttpStatus.TOO_MANY_REQUESTS;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +34,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -42,6 +45,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @EnableBinding(ReservationChannels.class)
 @EnableCircuitBreaker
@@ -68,7 +73,7 @@ interface ReservationChannels {
 }
 
 @EnableResourceServer
-// @EnableOAuth2Client
+@EnableOAuth2Client
 @RestController
 @RequestMapping(path = "/reservations")
 class ReservationApiGatewayRestController {
@@ -82,14 +87,16 @@ class ReservationApiGatewayRestController {
 		return factory.getUserInfoRestTemplate();
 	}
 
-	private final RestTemplate rtemplate;
+	@Autowired
+	@LoadBalanced
+	private RestTemplate rtemplate;
 	private final MessageChannel out;
 
 	public List<String> saver() {
 		return new ArrayList<>();
 	}
 	
-	@HystrixCommand(fallbackMethod = "saver")
+	// @HystrixCommand(fallbackMethod = "saver")
 	@GetMapping(value="/names")
 	public List<String> getNames() {
 		//Return type can be String.class or JsonNode.class or Map.class instead we use the one below
@@ -104,21 +111,35 @@ class ReservationApiGatewayRestController {
 			.collect(Collectors.toList());
 	}
 
+	@GetMapping(value="/pr")
+	public String getPrincipal(Principal principal) {
+		String username;
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		} else {
+			System.out.println("bul: "+principal.getName());
+			username = principal.toString();
+		  }
+		return username;
+	}
+
+	@GetMapping(value="/at")
+	public String getAuthentication(Authentication authentication) {
+		System.out.println("bul: "+authentication.getName());
+		return authentication.toString();
+	}
+	
+
 	@PostMapping
 	public void write(@RequestBody Reservation	r) {
 		Message<String> message = org.springframework.messaging.support.MessageBuilder.withPayload(r.getReservationName()).build();
 		this.out.send(message);
-		System.out.println("bul: message sent.. "+message.toString());
 	}
 
 
-	/**
-	 * @param rtemplate
-	 */
 	@Autowired
-	public ReservationApiGatewayRestController(RestTemplate rtemplate, ReservationChannels rChannels) {
+	public ReservationApiGatewayRestController (ReservationChannels rChannels) {
 		this.out=rChannels.output();
-		this.rtemplate = rtemplate;
 	}
 	
 

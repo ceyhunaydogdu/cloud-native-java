@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -28,15 +27,13 @@ import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @EnableBinding(ReservationChannels.class)
 @SpringBootApplication
 @EnableEurekaClient
-@EnableResourceServer
+// @EnableResourceServer
 // The one below also works
 // @EnableDiscoveryClient
 public class ReservationsServiceApplication {
@@ -53,15 +50,15 @@ public class ReservationsServiceApplication {
 		};
 	}
 
-	@Autowired
-	private UserInfoRestTemplateFactory factory;
+	// @Autowired
+	// private UserInfoRestTemplateFactory factory;
 
-	@Bean
-	@Lazy
-	@LoadBalanced
-	public OAuth2RestTemplate authRestTemplate() {
-		return factory.getUserInfoRestTemplate();
-	}
+	// @Bean
+	// @Lazy
+	// @LoadBalanced
+	// public OAuth2RestTemplate authRestTemplate() {
+	// 	return factory.getUserInfoRestTemplate();
+	// }
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationsServiceApplication.class, args);
