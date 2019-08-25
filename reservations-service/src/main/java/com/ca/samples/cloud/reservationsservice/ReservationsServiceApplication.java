@@ -1,6 +1,8 @@
 package com.ca.samples.cloud.reservationsservice;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.persistence.Entity;
@@ -27,6 +29,8 @@ import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -83,6 +87,11 @@ class MessageController{
 	@GetMapping(value="/message")
 	public String getMessage(){
 		return this.value;
+	}
+
+	@GetMapping(value = "/username")
+	public String getPrincipal(Principal principal) {
+		return principal.getName();
 	}
 	
 }
