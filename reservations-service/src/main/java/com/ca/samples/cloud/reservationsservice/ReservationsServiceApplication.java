@@ -34,7 +34,7 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@EnableBinding(ReservationChannels.class)
+@EnableBinding(ReservationChannel.class)
 @SpringBootApplication
 @EnableEurekaClient
 // @EnableResourceServer
@@ -111,7 +111,7 @@ class ReservationProcessor {
 	}
 }
 
-interface ReservationChannels {
+interface ReservationChannel {
 	@Input
 	SubscribableChannel input();
 }

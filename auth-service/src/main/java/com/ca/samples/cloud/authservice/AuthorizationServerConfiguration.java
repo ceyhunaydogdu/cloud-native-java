@@ -62,7 +62,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .orElseThrow(()-> new ClientRegistrationException("Couldn't find and bind reservation-client IP"));
                 
                 baseClientDetails.setRegisteredRedirectUri(Set.of(reservationClientRedirectUri));
-                System.out.println("bul: "+baseClientDetails.toString());
                 return baseClientDetails;
             })
             .orElseThrow(()-> new ClientRegistrationException(String.format("Client: %s not registered", clientId)));
