@@ -14,32 +14,35 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Input;
+// import org.springframework.cloud.stream.annotation.EnableBinding;
+// import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
-import org.springframework.integration.annotation.MessageEndpoint;
-import org.springframework.integration.annotation.ServiceActivator;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.SubscribableChannel;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+// import org.springframework.integration.annotation.MessageEndpoint;
+// import org.springframework.integration.annotation.ServiceActivator;
+// import org.springframework.messaging.Message;
+// import org.springframework.messaging.SubscribableChannel;
 // import org.springframework.security.core.Authentication;
 // import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@EnableBinding(ReservationChannels.class)
+// @EnableBinding(ReservationChannels.class)
 @SpringBootApplication
 @EnableEurekaClient
-// @EnableResourceServer
 // The one below also works
 // @EnableDiscoveryClient
+@EnableResourceServer
 public class ReservationsServiceApplication {
 
 	@Autowired
@@ -54,15 +57,15 @@ public class ReservationsServiceApplication {
 		};
 	}
 
-	// @Autowired
-	// private UserInfoRestTemplateFactory factory;
+	@Autowired
+	private UserInfoRestTemplateFactory factory;
 
-	// @Bean
-	// @Lazy
-	// @LoadBalanced
-	// public OAuth2RestTemplate authRestTemplate() {
-	// 	return factory.getUserInfoRestTemplate();
-	// }
+	@Bean
+	@Lazy
+	@LoadBalanced
+	public OAuth2RestTemplate authRestTemplate() {
+		return factory.getUserInfoRestTemplate();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationsServiceApplication.class, args);
@@ -96,7 +99,7 @@ class MessageController{
 	
 }
 
-@MessageEndpoint
+// @MessageEndpoint
 class ReservationProcessor {
 	private ReservationRepository reservationRepo;
 
@@ -106,15 +109,15 @@ class ReservationProcessor {
 	}
 
 
-	@ServiceActivator(inputChannel = "input")
-	public void acceptNewReservation(Message<String> msg) {
-		this.reservationRepo.save(new Reservation(msg.getPayload()));
-	}
+	// @ServiceActivator(inputChannel = "input")
+	// public void acceptNewReservation(Message<String> msg) {
+	// 	this.reservationRepo.save(new Reservation(msg.getPayload()));
+	// }
 }
 
 interface ReservationChannels {
-	@Input
-	SubscribableChannel input();
+	// @Input
+	// SubscribableChannel input();
 }
 
 @RepositoryRestResource

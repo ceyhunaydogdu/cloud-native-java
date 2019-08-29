@@ -1,22 +1,16 @@
 server:
-  port: 9191
+  port: ${PORT:9191}
 management:
   server:
     servlet:
       context-path: /uaa
-
-logging:
-  level: 
-    org.springframework.security: DEBUG 
-
 eureka:
-  instance:
+  # instance:
     # prefer-ip-address: false
     # ip-address: 192.168.1.7
     # virtual-host-name: auth-serv
-    hostname: localhost
+    # hostname: localhost
   client:
-    # service-url: http://localhost:8761/eureka/
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 

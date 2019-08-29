@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8000}
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service/uaa/user
+eureka:
+  # instance:
+    # prefer-ip-address: false
+    # ip-address: 192.168.1.7
+    # virtual-host-name: auth-serv
+    # hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+message: "iyi gunler Istanbul!!!!!!!!"
+
+# spring.zipkin.enabled=true
+
+# define the destination to which the input MessageChannel should be bound
+# spring.cloud.stream.bindings.input.destination = reservations
+
+# ensures 1 node in a group gets message (point-to-point, not a broadcast)
+# spring.cloud.stream.bindings.input.group = reservations-group
+
+# ensure that the Q is durable
+# spring.cloud.stream.bindings.input.durableSubscription = true
+
+
+

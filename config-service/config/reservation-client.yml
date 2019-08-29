@@ -1,9 +1,10 @@
-server.port=${PORT:9999}
-
+server: 
+  port: ${PORT:9999}
 security:
   oauth2:
     resource:
       user-info-uri: http://auth-service/uaa/user
+
 # ribbon.eureka.enabled=true
 # eureka.client.eureka-server-port=8761
 # eureka.instance.preferIpAddress=false
@@ -13,7 +14,6 @@ security:
 # eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 # spring.zipkin.enabled=true
 
-
 # zuul.routes.reservation-service.path=/reservation-service/**
 # zuul.routes.reservation-service.url= http://localhost:8000
 # zuul.routes.reservation-service.path=/res/**
@@ -22,11 +22,8 @@ security:
 # spring.cloud.stream.bindings.output.destination=reservations
 # spring.rabbitmq.template.retry.enabled=true
 
-# security.oauth2.resource.userInfoUri=http://localhost:9191/uaa/user
-
 #hystrix.command.default.execution.isolation.strategy=SEMAPHORE
 
-#
 # security.oauth2.client.client-secret=36f1653c889f3cc466519aa873188c33adfd53d4
 # security.oauth2.client.client-id=644c5dd8451bad01a627
 # security.oauth2.client.user-authorization-uri=https://github.com/login/oauth/authorize
@@ -34,4 +31,3 @@ security:
 # security.oauth2.client.client-authentication-scheme=form
 # security.oauth2.resource.user-info-uri=https://api.github.com/user
 # security.oauth2.resource.prefer-token-info=false
-security.oauth2.resource.user-info-uri= http://auth-service/uaa/user

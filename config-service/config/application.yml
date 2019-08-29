@@ -1,39 +1,42 @@
-spring.sleuth.scheduled.enabled=false
-spring.sleuth.async.enabled=false
-spring.sleuth.annotation.enabled=false
-spring.sleuth.sampler.probability=1.0
-spring.sleuth.log.slf4j.enabled=true
-#spring.zipkin.host=${DOCKER_IP}
-#spring.zipkin.host=192.168.1.11
-spring.zipkin.sender.type=web
-#spring.zipkin.base-url=http://${DOCKER_IP}:9411
-spring.zipkin.base-url=http://192.168.1.7:9411/
-#spring.zipkin.base-url=http://127.0.0.1:9411
-#logging.pattern.level=%d{ABSOLUTE} [%X{X-B3-TraceId}/%X{X-B3-SpanId}] %-5p [%t] %C{2} - %m%n
+spring:
+  jmx:
+    enabled: false
+  jpa:
+    generate-ddl: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    shutdown:
+      enabled: true
+debug: true
+info:
+  id: ${spring.application.name}
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
 
-
-# management endpoints
-management.endpoints.web.exposure.include=*
-
-management.endpoint.refresh.enabled=true
-
-
-### REACTIVE
-endpoints.default.web.enabled=true
-
-
-# disable JMX
-spring.jmx.enabled=false
-
-debug=true
-
-info.id=${spring.application.name}
 
 #server.port=${PORT:0}
-
-logging.level.org.springframework.security=DEBUG
+### REACTIVE
+# endpoints.default.web.enabled=true
 #logging.pattern.console=%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}]){yellow} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wex
 
+# spring.sleuth.scheduled.enabled=false
+# spring.sleuth.async.enabled=false
+# spring.sleuth.annotation.enabled=false
+# spring.sleuth.sampler.probability=1.0
+# spring.sleuth.log.slf4j.enabled=true
+#spring.zipkin.host=${DOCKER_IP}
+#spring.zipkin.host=192.168.1.11
+# spring.zipkin.sender.type=web
+#spring.zipkin.base-url=http://${DOCKER_IP}:9411
+# spring.zipkin.base-url=http://192.168.1.7:9411/
+#spring.zipkin.base-url=http://127.0.0.1:9411
+#logging.pattern.level=%d{ABSOLUTE} [%X{X-B3-TraceId}/%X{X-B3-SpanId}] %-5p [%t] %C{2} - %m%n
 
 
 #spring.cloud.consul.host=${DOCKER_IP}
@@ -45,24 +48,14 @@ logging.level.org.springframework.security=DEBUG
 # eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 # spring.cloud.inetutils.ignored-interfaces=docker0
 # spring.cloud.inetutils.preferredNetworks=192.168
-logging.level.com.netflix.eureka=OFF
-logging.level.com.netflix.discovery=OFF
-
-
 
 #spring.redis.host=${DOCKER_IP}
-
-
-management.endpoint.shutdown.enabled=true
-
-spring.jpa.generate-ddl=true
-
 
 #eureka.instance.hostname=${vcap.application.uris[0]:localhost}
 #eureka.instance.nonSecurePort=80
 
 #spring.rabbitmq.host=${DOCKER_IP}
-spring.rabbitmq.host=192.168.1.7
+# spring.rabbitmq.host=192.168.1.7
 ## Rabbit specific binder bits
 # spring.cloud.stream.binder.rabbit.default.default-delivery-mode=persistent
 # spring.cloud.stream.binder.rabbit.default.acknowledge-mode=manual
