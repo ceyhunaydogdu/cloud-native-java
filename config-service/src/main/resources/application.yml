@@ -8,9 +8,3 @@ spring:
           - config-service/config
 server:
   port: 8888
-
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    enabled: false
