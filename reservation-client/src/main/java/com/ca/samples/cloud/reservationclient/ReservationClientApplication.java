@@ -6,12 +6,12 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.stream.annotation.EnableBinding;
+// import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.client.RestTemplate;
 
-@EnableBinding(ReservationChannels.class)
+// @EnableBinding(ReservationChannels.class)
 @EnableCircuitBreaker
 @EnableZuulProxy
 @EnableEurekaClient

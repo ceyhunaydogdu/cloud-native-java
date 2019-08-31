@@ -17,8 +17,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
+// import org.springframework.messaging.Message;
+// import org.springframework.messaging.MessageChannel;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -47,12 +47,12 @@ public class ReservationApiGatewayRestController {
     
 	@Autowired
 	private RestTemplate rtemplate;
-	private final MessageChannel out;
+	// private final MessageChannel out;
 
-    @Autowired
-    public ReservationApiGatewayRestController(ReservationChannels rChannels) {
-        this.out = rChannels.output();
-    }
+    // @Autowired
+    // public ReservationApiGatewayRestController(ReservationChannels rChannels) {
+    //     this.out = rChannels.output();
+    // }
 
 	public List<String> saver() {
 		return new ArrayList<>();
@@ -80,11 +80,11 @@ public class ReservationApiGatewayRestController {
 		return details.toString();
 	}
 
-	@PostMapping
-	public void write(@RequestBody Reservation r) {
-		Message<String> message = org.springframework.messaging.support.MessageBuilder
-				.withPayload(r.getReservationName()).build();
-		this.out.send(message);
-	}
+	// @PostMapping
+	// public void write(@RequestBody Reservation r) {
+	// 	Message<String> message = org.springframework.messaging.support.MessageBuilder
+	// 			.withPayload(r.getReservationName()).build();
+	// 	this.out.send(message);
+	// }
 
 }
