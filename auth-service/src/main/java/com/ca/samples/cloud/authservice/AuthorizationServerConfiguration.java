@@ -56,12 +56,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 client.getScopes(), client.getAuthorizedGrantTypes(), client.getAuthorities());
                 baseClientDetails.setClientSecret(client.getSecret());
                 // baseClientDetails.setAutoApproveScopes(List.of(client.getAutoApproveScopes().split(",")));
-                String reservationClientRedirectUri=Optional
-                .ofNullable(this.loadBalancerClient.choose("reservation-client"))
-                .map(rsi-> "http://"+rsi.getHost()+":"+rsi.getPort()+"/reservations/names")
-                .orElseThrow(()-> new ClientRegistrationException("Couldn't find and bind reservation-client IP"));
+                // String reservationClientRedirectUri=Optional
+                // .ofNullable(this.loadBalancerClient.choose("reservation-client"))
+                // .map(rsi-> "http://"+rsi.getHost()+":"+rsi.getPort()+"/reservations/names")
+                // .orElseThrow(()-> new ClientRegistrationException("Couldn't find and bind reservation-client IP"));
                 
-                baseClientDetails.setRegisteredRedirectUri(Set.of(reservationClientRedirectUri));
+                // baseClientDetails.setRegisteredRedirectUri(Set.of(reservationClientRedirectUri));
                 return baseClientDetails;
             })
             .orElseThrow(()-> new ClientRegistrationException(String.format("Client: %s not registered", clientId)));

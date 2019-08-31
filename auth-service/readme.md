@@ -32,6 +32,14 @@ $ curl -X POST -d "username=ceyhun&password=native&grant_type=password&scope=ope
 
 ```
 
+Authorization server application should also secure `/uaa/user` endpoint with `@EnableResourceServer` annotation. After getting the access token with curl command above, we can access the authenticated user info by providing the access token to the user endpoint as shown below.
+
+```curl
+
+$ curl -H"authorization: bearer insert-token-value-here" http://localhost:9191/uaa/user
+
+```
+
 After locking down the reservation-client application, we can access to resources by providing access token like the following.
 
 ```curl
