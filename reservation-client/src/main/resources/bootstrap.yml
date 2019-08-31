@@ -4,10 +4,10 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-# security:
-#   oauth2:
-#     client:
-#       client-id: reservation-client
-#       client-secret: res-secret
-#       user-authorization-uri: http://localhost:9191/uaa/oauth/authorize
-#       access-token-uri: http://localhost:9191/uaa/oauth/token
+security:
+  oauth2:
+    client:
+      client-id: reservation-client
+      client-secret: res-secret
+      user-authorization-uri: http://auth-service/uaa/oauth/authorize
+      access-token-uri: http://auth-service/uaa/oauth/token
