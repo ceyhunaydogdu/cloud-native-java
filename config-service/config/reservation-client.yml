@@ -1,9 +1,6 @@
 server: 
   port: ${PORT:9999}
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth-service/uaa/user
+
 
 # ribbon.eureka.enabled=true
 # eureka.client.eureka-server-port=8761

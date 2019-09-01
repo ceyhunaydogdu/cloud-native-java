@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,7 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableResourceServer
 // @EnableOAuth2Client
+@EnableOAuth2Sso
 @RestController
 @RequestMapping(path = "/reservations")
 public class ReservationApiGatewayRestController {
