@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.web.client.RestTemplate;
 
 // @EnableBinding(ReservationChannels.class)
-@EnableOAuth2Client
+// @EnableOAuth2Client
 @EnableCircuitBreaker
 @EnableZuulProxy
 @EnableEurekaClient
@@ -27,12 +27,12 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ReservationClientApplication {
 
-	// @Bean
-	// @Lazy
-	// @LoadBalanced
-	// RestTemplate restTemplate() {
-	// 	return new RestTemplate();
-	// }
+	@Bean
+	@Lazy
+	@LoadBalanced
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
 	
 	

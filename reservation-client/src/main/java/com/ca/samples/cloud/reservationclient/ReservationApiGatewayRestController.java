@@ -32,21 +32,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@EnableResourceServer
+// @EnableResourceServer
 // @EnableOAuth2Client
-@EnableOAuth2Sso
+// @EnableOAuth2Sso
 @RestController
 @RequestMapping(path = "/reservations")
 public class ReservationApiGatewayRestController {
-	@Autowired
-	private UserInfoRestTemplateFactory factory;
+	// @Autowired
+	// private UserInfoRestTemplateFactory factory;
 
-	@Bean
-	@Lazy
-	@LoadBalanced
-	public OAuth2RestTemplate authRestTemplate() {
-        return factory.getUserInfoRestTemplate();
-	}
+	// @Bean
+	// @Lazy
+	// @LoadBalanced
+	// public OAuth2RestTemplate authRestTemplate() {
+    //     return factory.getUserInfoRestTemplate();
+	// }
     
 	@Autowired
 	private RestTemplate rtemplate;
