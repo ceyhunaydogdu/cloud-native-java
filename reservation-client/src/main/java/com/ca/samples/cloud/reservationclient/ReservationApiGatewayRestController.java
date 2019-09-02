@@ -74,15 +74,20 @@ public class ReservationApiGatewayRestController {
 		return responseEntity.getBody().getContent().stream().map(Reservation::getReservationName)
 				.collect(Collectors.toList());
 	}
+	
+	@GetMapping(value = "/user")
+	public Principal getPrincipal(Principal principal) {
+		return principal;
+	}
 
 	@GetMapping(value = "/userdetails")
-	public String getPrincipal(Principal principal) {
+	public String getPrincipalDetails(Principal principal) {
 		OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) principal;
 		Authentication userAuthentication = oAuth2Authentication.getUserAuthentication();
 		Map<String, Object> details = (Map<String, Object>)((Map<String, Object>)((Map<String, Object>) userAuthentication.getDetails()).get("userAuthentication")).get("details");
 		return details.toString();
 	}
-
+	
 	// @PostMapping
 	// public void write(@RequestBody Reservation r) {
 	// 	Message<String> message = org.springframework.messaging.support.MessageBuilder
