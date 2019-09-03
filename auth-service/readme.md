@@ -47,3 +47,4 @@ After locking down the reservation-client application, we can access to resource
 $ curl -H"authorization: bearer insert-token-value-here" http://localhost:9999/reservations/names
 
 ```
+ 

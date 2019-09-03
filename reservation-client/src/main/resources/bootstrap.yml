@@ -11,6 +11,13 @@ security:
       client-secret: res-secret
       user-authorization-uri: http://localhost:9191/uaa/oauth/authorize
       access-token-uri: http://localhost:9191/uaa/oauth/token
-    # resource:
-    #   user-info-uri: http://auth-service/uaa/user
-    #   prefer-token-info: false
+    resource:
+      user-info-uri: http://localhost:9191/uaa/user
+      prefer-token-info: false
+# zuul:
+#   routes:
+#     auth-service:
+#       sensitiveHeaders: Authorization
+#       path: /auth-service/**
+#       stripPrefix: false
+#   add-proxy-headers: true

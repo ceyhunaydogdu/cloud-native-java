@@ -28,7 +28,7 @@ app.controller("home", function ($http, $rootScope, oauth) {
 
         // var name=window.prompt('Who would you like to greet?');
 
-        $http.get('reservation-service/reservations')
+        $http.get('reservation-service/message')
             .success(function (data) {
                 self.greeting=data;
             })

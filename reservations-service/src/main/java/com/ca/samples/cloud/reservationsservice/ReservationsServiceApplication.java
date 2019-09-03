@@ -92,14 +92,14 @@ class MessageController{
 		return this.value;
 	}
 
-	@GetMapping(value = "/username")
-	public String getPrincipal(Principal principal) {
-		return principal.getName();
+	@GetMapping(value = "/user")
+	public Principal getPrincipal(Principal principal) {
+		return principal;
 	}
 	
 }
 
-// @MessageEndpoint
+// @MessageEndpoint 
 class ReservationProcessor {
 	private ReservationRepository reservationRepo;
 
