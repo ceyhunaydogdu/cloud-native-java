@@ -2,7 +2,6 @@ package com.ca.samples.cloud.reservationsservice;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -26,8 +25,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
-// import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-// import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 // import org.springframework.integration.annotation.MessageEndpoint;
 // import org.springframework.integration.annotation.ServiceActivator;
 // import org.springframework.messaging.Message;
@@ -42,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableEurekaClient
 // The one below also works
 // @EnableDiscoveryClient
-// @EnableResourceServer
+@EnableResourceServer
 public class ReservationsServiceApplication {
 
 	@Autowired
@@ -57,15 +56,15 @@ public class ReservationsServiceApplication {
 		};
 	}
 
-	// @Autowired
-	// private UserInfoRestTemplateFactory factory;
+	@Autowired
+	private UserInfoRestTemplateFactory factory;
 
-	// @Bean
-	// @Lazy
-	// @LoadBalanced
-	// public OAuth2RestTemplate authRestTemplate() {
-	// 	return factory.getUserInfoRestTemplate();
-	// }
+	@Bean
+	@Lazy
+	@LoadBalanced
+	public OAuth2RestTemplate authRestTemplate() {
+		return factory.getUserInfoRestTemplate();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationsServiceApplication.class, args);
